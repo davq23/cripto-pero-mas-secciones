@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criptolocos</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="shortcut icon" href="assets/cripto.png" type="image/png">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body class="bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><i class="bi bi-currency-bitcoin"></i> Criptolocos</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/"><i class="bi bi-person-circle"></i> Nosotros</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link d-flex align-items-center" aria-current="page" href="criptoactivos.html">
+              <i class="material-icons">monetization_on</i>
+              Criptoactivos</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link d-flex align-items-center" href="convertidor.html"><i class="material-icons">repeat</i>
+              Convertidor</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="opiniones.html"><i class="bi bi-chat-fill"></i> Opiniones</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="contacto.html"><i class="bi bi-blockquote-left"></i> Contacto</a>
+          </li>
+        </ul>
+        <span class="navbar-text">
+          Navbar text with an inline element
+        </span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-3">
+    <div class="row justify-content-evenly">
+      <div class="col text-center">
+        <img srcset="assets/copper-bitcoin-on-top-of-dollar-bills-small.jpg 300w,
+            assets/copper-bitcoin-on-top-of-dollar-bills-standard.jpg 800w" 
+            sizes="(max-width: 720px) 350px,
+            (max-width: 480px) 440px,
+          800px" src="assets/copper-bitcoin-on-top-of-dollar-bills-standard.jpg alt="">
+      </div>
+      <section class="col bg-light px-2 py-3 rounded">
+        <h3 class="mb-3">Contacto</h3>
+        <form id="contactForm">
+          <div class="mb-3">
+            <label for="from" class="form-label">Remitente:</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+              <input type="email" class="form-control" name="from" id="fromInput" aria-describedby="fromId"
+                placeholder="" required>
+            </div>
+            <small id="fromId" class="form-text text-muted">Su email</small>
+          </div>
+          <div class="mb-3">
+            <label for="from" class="form-label">Asunto:</label>
+            <input type="text" class="form-control" name="subject" id="subjectInput" aria-describedby="subjectId"
+              placeholder="" required>
+            <small id="subjectId" class="form-text text-muted">Asunto del email</small>
+          </div>
+          <div class="mb-3">
+            <label for="message" class="form-label">Mensaje:</label>
+            <textarea class="form-control" name="message" id="messageTextArea" rows="10" aria-describedby="messageId"
+              required>
+                  </textarea>
+            <small id="messageId" class="form-text text-muted">Cuerpo del email</small>
+          </div>
+          <div class="mb-3">
+            <button class="btn btn-primary w-25" type="submit">Enviar</button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+  </script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>

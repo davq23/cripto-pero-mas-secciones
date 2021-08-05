@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criptolocos</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="shortcut icon" href="assets/cripto.png" type="image/png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body class="bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><i class="bi bi-currency-bitcoin"></i> Criptolocos</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/"><i class="bi bi-person-circle"></i>
+                            Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" aria-current="page" href="criptoactivos.html">
+                            <i class="material-icons">monetization_on</i>
+                            Criptoactivos</a>
+                      </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" href="convertidor.html"><i class="material-icons">repeat</i>
+                            Convertidor</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="opiniones.html"><i class="bi bi-chat-fill"></i> Opiniones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacto.html"><i class="bi bi-blockquote-left"></i> Contacto</a>
+                    </li>
+                </ul>
+                <span class="navbar-text">
+                    Navbar text with an inline element
+                </span>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col text-center">
+                <img srcset="assets/happy-woman-small.jpg 320w,
+                assets/happy-woman-standard.jpg 800w" sizes="(max-width: 320px) 280px,
+                      (max-width: 480px) 440px,
+                      800px" src="assets/happy-woman-standard.jpg" alt="Bitconnect publicity lmao">
+            </div>
+            <div class="col bg-light p-3 rounded">
+                <h3>¡Nos interesa saber qué piensa!</h3>
+                <p>Este es un foro público donde puede colocar sus opiniones sobre las criptomonedas</p>
+                <p><strong>ADVERTENCIA: SU MENSAJE PASARÁ POR LOS ADMINISTRADORES ANTES DE SER PUBLICADO</strong></p>
+                <form action="php/index.php?action=post_comment">
+                    <label for="usuario" class="form-label">Usuario</label>
+                    <input type="text" name="usuario" class="form-control">
+                    <label for="usuario" class="form-label">Comentario</label>
+                    <textarea class="w-100 form-control" name="comment-box" id="comment-box" rows="5"
+                        style="resize: none;"></textarea>
+                </form>
+            </div>
+        </div>
+        <div class="row justify-content-evenly mt-3 rounded">
+            <div class="col bg-light p-3">
+                <h3>Opiniones</h3>
+                <div id="comment-list" role="component" david-component-type="comment-list" 
+                    fetch_data_url="php/index.php?action=fetch_comments" limit="25">
+                    <div name="david-comment-list">
+                    </div>
+                    <div class="d-flex justify-content-evenly">
+                        <button name="last"class="btn btn-primary d-flex align-items-center"><i class="material-icons">navigate_before</i> Anterior</button>
+                        <button name="next" class="btn btn-primary d-flex align-items-center">Siguiente <i class="material-icons">navigate_next</i></button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
