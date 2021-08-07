@@ -43,5 +43,6 @@
 #pagination > button:disabled {
     background-color: gray;
     outline: none;
-    border: none
+    border: none;
+    opacity: 1;
 }
