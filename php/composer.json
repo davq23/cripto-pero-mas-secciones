@@ -1,0 +1,20 @@
+{
+    "name": "davido/paging",
+    "type": "project",
+    "authors": [
+        {
+            "name": "davq23",
+            "email": "davidquinterogranadillo@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "database\\": "database/",
+            "models\\": "models/",
+            "routes\\": "routes/",
+            "controllers\\": "controllers/",
+            "utils\\": "utils/"
+        }
+    }
+}   
