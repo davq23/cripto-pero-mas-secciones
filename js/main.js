@@ -65,7 +65,7 @@ var inputHandler = null;
 var object = {};
 
 if (document.getElementById('comment-form')) {
-    document.getElementById('criptoactivo-list').addEventListener('submit', function (event) {
+    document.getElementById('comment-form').addEventListener('submit', function (event) {
         var payLoad = {};
         var payLoadForm = null;
 
@@ -84,7 +84,7 @@ if (document.getElementById('comment-form')) {
                 return;
         }
 
-        xhr.open('POST', 'http://localhost/php/public/comments/new/' + this.getAttribute('format'), true);
+        xhr.open('POST', '/php/public/comments/new/' + this.getAttribute('format'), true);
 
         xhr.send(payloadForm);
 
