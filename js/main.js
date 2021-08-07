@@ -188,8 +188,6 @@ if (document.getElementById('criptoactivo-list')) {
 
 
 document.addEventListener('DOMContentLoaded', function (event) {
-    Cryptomaniacos.Elements.Toast = new bootstrap.Toast(document.getElementById('errorToast'));
-
     var fillCoins =  function (coinArray) {
         var fragment = document.createDocumentFragment();
 
@@ -216,8 +214,6 @@ document.addEventListener('DOMContentLoaded', function (event) {
     if (document.getElementById('criptoactivo-select')) 
         getCoins(limit, skip, document.getElementById('criptoactivo-select').value, fillCoins, function(response, status) {
             console.log(status, response);
-
-            Cryptomaniacos.Elements.Toast.show();
         });
 
     if (document.getElementById('criptoactivo-list')) {
@@ -311,8 +307,8 @@ var Cryptomaniacos = {
             cardBody.classList.add('card-body', 'justify-content-center', 'align-items-center');
 
             var cardImg = document.createElement('img');
-            cardImg.width = '100'
-            cardImg.height = '100'
+            cardImg.width = '25'
+            cardImg.height = '25'
             cardImg.src = imgSrc;
 
             var cardTitle = document.createElement('h5');
@@ -329,55 +325,3 @@ var Cryptomaniacos = {
         }
     }
 }
-
-
-document.onreadystatechange = function (event) {
-    if (this.readyState === 'complete') {
-        
-    }
-}
-
-
-var Criptolocos = {
-    Components: {
-        /**
-         * Lista de comentarios
-         * 
-         * @param {HTMLElement} element 
-         */
-        CommentList: function (element) {
-            this.element = element;
-
-            this.last = 0;
-
-            var limit = this.element.getAttribute('limit');
-
-
-
-            this.element.addEventListener('click', function (event) {
-
-                switch (event.target.name) {
-                    case 'next':
-                        
-                        break;
-                
-                    case 'last':
-                        
-                        break;
-                
-                    default:
-                        break;
-                }
-                
-            }, {
-                capture: true,
-            });
-        },
-
-        Convertor: function (element) {
-            this.element = element;
-
-
-        }
-    }
-};
