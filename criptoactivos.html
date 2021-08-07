@@ -51,15 +51,36 @@
     </div>
   </nav>
 
-  <div class="container-fluid mt-3">
-    <div class="row justify-content-evenly">
+  <div class="container-fluid mt-2">
+    <div class="row justify-content-center d-flex w-100 text-center">
+      <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img srcset="assets/piles-of-coins-with-plant-in-front-of-graph-small.jpg 720w,
+                  assets/piles-of-coins-with-plant-in-front-of-graph-standard.jpg 800w" 
+                      sizes="(max-width: 720px) 350px,
+                      (max-width: 480px) 440px,
+                    800px" src="assets/piles-of-coins-with-plant-in-front-of-graph-standard.jpg" alt="">
+            
+          </div>
+          <div class="carousel-item">
+            <img srcset="assets/bitcoin-bannersmall.jpg 720w,
+                      assets/bitcoin-bannerstandard.jpg 800w" 
+                      sizes="(max-width: 720px) 350px,
+                      (max-width: 480px) 440px,
+                    800px" src="assets/bitcoin-bannerstandard.jpg" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-evenly mt-2">
       <section class="col-8 bg-light px-2 py-3 rounded-end">
         <div role="component" david-component-type="criptoactivo-list"
           fetch_data_url="php/index.php?action=fetch_criptoactivos">
           <div name="david-criptoactivo-list" id="criptoactivo-list" 
           class="d-flex flex-wrap justify-content-center">
           </div>
-          <div class="d-flex justify-content-evenly mt-4">
+          <div class="d-flex justify-content-evenly mt-4" id="pagination">
             <button name="last" class="btn btn-primary d-flex align-items-center"><i
                 class="material-icons">navigate_before</i> Anterior</button>
             <button name="next" class="btn btn-primary d-flex align-items-center">Siguiente <i
@@ -70,6 +91,30 @@
       </section>
     </div>
   </div>
+  <div class="modal fade" id="criptoActivoModal" tabindex="-1" aria-labelledby="criptoActivoModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title" id="criptoActivoModalLabel"></h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img src="" alt="" class="img-fluid w-5">
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#network-list" aria-expanded="false" aria-controls="network-list">
+                        Redes sociales
+                    </button>
+                    <div class="collapse" id="network-list">
+                        <ul class="list-group  list-group-flush">
+                            <li class="list-group-item"><a href="" id="websiteUrl" target="_blank">Website</a></li>
+                            <li class="list-group-item"><a href="" id="twitterUrl" target="_blank">Twitter</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">

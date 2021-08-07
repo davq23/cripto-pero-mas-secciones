@@ -64,13 +64,50 @@ function getCoins(limit, skip, callbackSuccess, callbackFailure) {
 var inputHandler = null;
 var object = {};
 
+if (document.getElementById('comment-form')) {
+    document.getElementById('criptoactivo-list').addEventListener('submit', function (event) {
+        var payLoad = {};
+        var payLoadForm = null;
+
+        this.querySelectorAll('input,textarea').forEach(function (input) {
+            payLoad[input.name] = input.value;
+        });
+
+        var xhr = new XMLHttpRequest();
+
+        switch (this.getAttribute('format')) {
+            case 'json':
+                payLoadForm = JSON.stringify(payLoad);
+                break
+        
+            default:
+                return;
+        }
+
+        xhr.open('POST', 'http://localhost/php/public/comments/new/' + this.getAttribute('format'), true);
+
+        xhr.send(payloadForm);
+
+    });
+
+}
+
+if (document.getElementById('comment-list')) {
+    
+}
+
 if (document.getElementById('criptoactivo-list')) {
     document.getElementById('criptoactivo-list').addEventListener('click', seeCripto);
 
     document.getElementById('criptoactivo-list').addEventListener('fill-coins', function (event) {
         var cryptoList = this;
 
+        document.getElementById('pagination').dispatchEvent(new Event('toggle'));
+
+        cryptoList.innerText = 'Cargando...';
+
         var success = function (coinArray) {
+            document.getElementById('pagination').dispatchEvent(new Event('toggle'));
             var fragment = document.createDocumentFragment();
 
             coinArray.coins.forEach(function (coin) {
@@ -85,9 +122,37 @@ if (document.getElementById('criptoactivo-list')) {
         }
 
         getCoins(limit, skip, success, function () {
-            Cryptomaniacos.Elements.Toast.show();
-            cryptoList.innerText = '';
+            cryptoList.innerText = 'Un error ha ocurrido. Por favor, recargue la página';
         });
+    });
+
+    document.getElementById('pagination').addEventListener('toggle', function (event) {
+        for (var i = 0; i < this.children.length; i++) {
+            this.children[i].disabled = !this.children[i].disabled;
+        }
+    });
+
+    document.getElementById('pagination').addEventListener('click', function (event) {
+        var element = event.target;
+
+        if (element.name === 'next' || element.parentElement.name === 'next') {
+            skip += limit;
+        } else if (element.name === 'last' || element.parentElement.name === 'last') {
+            var newSkip = skip - limit;
+
+            if (newSkip < 0) {
+                return;
+            }
+
+            skip = newSkip;
+            
+        } else {
+            return;
+        }
+
+        document.getElementById('criptoactivo-list').dispatchEvent(new Event('fill-coins'));
+    }, {
+        capture: true,
     });
 
     document.getElementById('criptoactivo-list').addEventListener('click', function (event) {
@@ -243,9 +308,11 @@ var Cryptomaniacos = {
             cardDiv.classList.add('card', 'w-15', 'mt-2');
 
             var cardBody = document.createElement('div');
-            cardBody.classList.add('card-body');
+            cardBody.classList.add('card-body', 'justify-content-center', 'align-items-center');
 
             var cardImg = document.createElement('img');
+            cardImg.width = '100'
+            cardImg.height = '100'
             cardImg.src = imgSrc;
 
             var cardTitle = document.createElement('h5');

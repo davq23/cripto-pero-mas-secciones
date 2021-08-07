@@ -39,3 +39,9 @@
 .min-height-15rem {
     min-height: 15rem;
 }
+
+#pagination > button:disabled {
+    background-color: gray;
+    outline: none;
+    border: none
+}
