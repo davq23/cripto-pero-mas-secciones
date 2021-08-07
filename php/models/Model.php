@@ -16,6 +16,6 @@ class Model
 
     public function __construct(?DBConnection $db = null)
     {
-        $this->db = $db ?? new MySQLConnection('localhost:3306', 'criptolocos', 'root', '');
+        $this->db = $db ?? new MySQLConnection(getenv('dbhost'), getenv('dbname'), getenv('dbuser'), getenv('dbpassword'));
     }
 }
