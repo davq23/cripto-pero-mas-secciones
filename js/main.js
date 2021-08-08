@@ -84,6 +84,8 @@ if (document.getElementById('comment-form')) {
                         input.disabled = false;
                     });
 
+                    skip = 0;
+
                     document.getElementById('comment-list').dispatchEvent(new Event('fill-comments'));
                     break;
             
