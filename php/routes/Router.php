@@ -32,6 +32,11 @@ class Router
         return $this->notFound;
     }
 
+    public function endsWith($haystack, $needle) {
+        $length = strlen($needle);
+        return $length > 0 ? substr($haystack, -$length) === $needle : true;
+    }
+
     private static function registerRoute(array &$routeArray, string $pattern, $callback)
     {
         if ($pattern === '/') {
@@ -63,9 +68,9 @@ class Router
 
     public function run()
     {
-        $path = str_replace('/heroes_patrios_api_puro/public', '', $_SERVER['REQUEST_URI']);
+        $path = str_replace('/php/public', '', $_SERVER['REQUEST_URI']);
 
-        if (!str_ends_with($path, '/')) $path .= '/';
+        if (!$this->endsWith($path, '/')) $path .= '/';
         
         $patternParts = explode('/', $path);
 

@@ -66,6 +66,10 @@ var object = {};
 
 if (document.getElementById('comment-form')) {
     document.getElementById('comment-form').addEventListener('submit', function (event) {
+        var cryptoList = this; 
+        
+        event.preventDefault();
+
         var payLoad = {};
         var payLoadForm = null;
 
@@ -79,7 +83,7 @@ if (document.getElementById('comment-form')) {
         xhr.onload = function () {
             switch (xhr.status) {
                 case 200:
-                    this.querySelectorAll('input,textarea').forEach(function (input) {
+                    cryptoList.querySelectorAll('input,textarea').forEach(function (input) {
                         input.value = '';
                         input.disabled = false;
                     });
@@ -97,9 +101,9 @@ if (document.getElementById('comment-form')) {
       
         payLoadForm = JSON.stringify(payLoad);
 
-        xhr.open('POST', '/php/public/comments/new/' + this.getAttribute('format'), true);
+        xhr.open('POST', 'php/public/comments/new', true);
 
-        xhr.send(payloadForm);
+        xhr.send(payLoadForm);
 
     });
 
@@ -161,7 +165,7 @@ if (document.getElementById('comment-list')) {
 
             if (!commentArray.next_comment_id) {
                 document.getElementById('comment-list-pagination').
-                    querySelectorAll('button[name="next"]').disabled = true;
+                    querySelector('button[name="next"]').disabled = true;
             }
         }
 
@@ -330,6 +334,48 @@ document.addEventListener('DOMContentLoaded', function (event) {
     if (document.getElementById('comment-list')) {
         document.getElementById('comment-list').dispatchEvent(new Event('fill-comments'));
     }
+    
+    if (document.getElementById('contactForm')) {
+        document.getElementById('contactForm').onsubmit = function (event) {
+                event.preventDefault();
+
+                var formData = {};
+
+                var request = new XMLHttpRequest();
+
+                document.getElementById('contactForm').querySelectorAll('input,button').forEach(function(element) {
+                    element.disabled = true;
+                });
+                
+                
+                document.getElementById('contactForm').querySelectorAll('input,textarea').forEach(function(element) {
+                    formData[element.name] = element.value;
+                })
+
+                request.onreadystatechange = function() {
+                    document.getElementById('contactForm').querySelectorAll('input,button').forEach(function(element) {
+                    element.disabled = false;
+                });                          
+
+                    if (request.readyState === request.DONE) {
+                        switch (request.status) {
+                            case 200:
+                                document.getElementById('contactForm').reset();
+                                break;
+                                
+                            default:
+                                break;
+                        }
+                                
+                        
+                    }
+                }
+
+                request.open('POST', 'php/public/email/send', true);
+
+                request.send(JSON.stringify(formData));
+            }
+    }
 });
 
 if (document.getElementById('criptoActivoModal')) {
@@ -339,6 +385,8 @@ if (document.getElementById('criptoActivoModal')) {
             networkList.hide();
         }
     });
+    
+    
 }
 function calculateEventListener() {
     var input = document.getElementById('criptoactivo-input');
@@ -437,7 +485,7 @@ var Cryptomaniacos = {
 
         Comment: function(author, body, datetime) {
             var elementDiv = document.createElement('div');
-            elementDiv.classList.add('bg-light', 'd-flex', 'flex-column');
+            elementDiv.classList.add('bg-light', 'd-flex', 'flex-column', 'justify-content-evenly', 'border');
 
             var authorH5 = document.createElement('h5');
             authorH5.innerText = author;

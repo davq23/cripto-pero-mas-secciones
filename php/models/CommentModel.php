@@ -11,8 +11,8 @@ class CommentModel extends Model {
         if ($db instanceof \PDO) {
             $statement = $db->prepare('SELECT id, author, body, datetime FROM cripto_comments WHERE verified = 1 ORDER BY id DESC LIMIT ? OFFSET ?');
 
-            $statement->bindParam(1, $offsetID, \PDO::PARAM_INT);
-            $statement->bindParam(2, $limitPlusOne, \PDO::PARAM_INT);
+            $statement->bindParam(1, $limitPlusOne, \PDO::PARAM_INT);
+            $statement->bindParam(2, $offsetID, \PDO::PARAM_INT);
 
             $ok = $statement->execute();
 
