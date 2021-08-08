@@ -9,7 +9,7 @@ class CommentModel extends Model {
         $db = $this->db->getConnection();
 
         if ($db instanceof \PDO) {
-            $statement = $db->prepare('SELECT id, author, body, datetime FROM cripto_comments WHERE verified = 1 AND id >= ? ORDER BY id LIMIT ?');
+            $statement = $db->prepare('SELECT id, author, body, datetime FROM cripto_comments WHERE verified = 1 ORDER BY id DESC LIMIT ? OFFSET ?');
 
             $statement->bindParam(1, $offsetID, \PDO::PARAM_INT);
             $statement->bindParam(2, $limitPlusOne, \PDO::PARAM_INT);
@@ -17,6 +17,7 @@ class CommentModel extends Model {
             $ok = $statement->execute();
 
             if (!$ok) {
+                error_log(json_encode($statement->errorInfo()));
                 return 'DB error';
             }
 

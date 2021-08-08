@@ -71,18 +71,29 @@ if (document.getElementById('comment-form')) {
 
         this.querySelectorAll('input,textarea').forEach(function (input) {
             payLoad[input.name] = input.value;
+            input.disabled = true;
         });
 
         var xhr = new XMLHttpRequest();
 
-        switch (this.getAttribute('format')) {
-            case 'json':
-                payLoadForm = JSON.stringify(payLoad);
-                break
-        
-            default:
-                return;
+        xhr.onload = function () {
+            switch (xhr.status) {
+                case 200:
+                    this.querySelectorAll('input,textarea').forEach(function (input) {
+                        input.value = '';
+                        input.disabled = false;
+                    });
+
+                    document.getElementById('comment-list').dispatchEvent(new Event('fill-comments'));
+                    break;
+            
+                default:
+                    break;
+            }
         }
+
+      
+        payLoadForm = JSON.stringify(payLoad);
 
         xhr.open('POST', '/php/public/comments/new/' + this.getAttribute('format'), true);
 
@@ -93,7 +104,101 @@ if (document.getElementById('comment-form')) {
 }
 
 if (document.getElementById('comment-list')) {
+    function getComments(limit, skip, callbackSuccess, callbackFailure) {
+        var xhr = new XMLHttpRequest();
     
+        xhr.onreadystatechange = function () {
+            if (this.readyState === this.DONE) {
+                var response = null;
+    
+                try {
+                    response = JSON.parse(this.responseText);
+                } catch(err) {}
+    
+                switch (this.status) {
+                    case Cryptomaniacos.Constants.HTTP_STATUS_OK:
+                        callbackSuccess(response);
+                        break;
+                
+                    default:
+                        callbackFailure(response, this.status);
+                        break;
+                }
+            }
+        }
+    
+        xhr.open('GET', 'php/public/comments/all/'+limit+'/'+skip);
+    
+        xhr.withCredentials = false;
+    
+        xhr.send();
+    }
+
+    document.getElementById('comment-list-pagination').addEventListener('toggle', function(event) {
+        
+    })
+
+    document.getElementById('comment-list').addEventListener('fill-comments', function (event) {
+        var cryptoList = this;
+        
+        var success = function (commentArray) {
+            document.getElementById('comment-list-pagination').querySelectorAll('button').forEach(function(btn) {
+                btn.disabled = true;
+            });
+
+            var fragment = document.createDocumentFragment();
+
+            commentArray.comments.forEach(function (comment) {
+                var commentDiv = Cryptomaniacos.Elements.Comment(comment.author, comment.body, comment.datetime);
+
+                fragment.appendChild(commentDiv);
+            });
+
+            cryptoList.innerText = '';
+            cryptoList.appendChild(fragment);
+
+            if (!commentArray.next_comment_id) {
+                document.getElementById('comment-list-pagination').
+                    querySelectorAll('button[name="next"]').disabled = true;
+            }
+        }
+
+        document.getElementById('comment-list-pagination').querySelectorAll('button').forEach(function(btn) {
+            btn.disabled = false;
+        });
+
+        getComments(limit, skip, success, function () {
+            document.getElementById('comment-list').innerText = 'Error al buscar comentarios';
+        })
+
+    });
+
+    document.getElementById('comment-list-pagination').querySelectorAll('button').forEach(function(btn) {
+        btn.disabled = true;
+    });
+
+    document.getElementById('comment-list-pagination').addEventListener('click', function(event) {
+        var element = event.target;
+
+        if (element.name === 'next' || element.parentElement.name === 'next') {
+            skip += limit;
+        } else if (element.name === 'last' || element.parentElement.name === 'last') {
+            var newSkip = skip - limit;
+
+            if (newSkip < 0) {
+                return;
+            }
+
+            skip = newSkip;
+            
+        } else {
+            return;
+        }
+
+        document.getElementById('comment-list').dispatchEvent(new Event('fill-comments'));
+    }, {
+        capture: true,
+    })
 }
 
 if (document.getElementById('criptoactivo-list')) {
@@ -219,6 +324,10 @@ document.addEventListener('DOMContentLoaded', function (event) {
     if (document.getElementById('criptoactivo-list')) {
         document.getElementById('criptoactivo-list').dispatchEvent(new Event('fill-coins'));
     }
+
+    if (document.getElementById('comment-list')) {
+        document.getElementById('comment-list').dispatchEvent(new Event('fill-comments'));
+    }
 });
 
 if (document.getElementById('criptoActivoModal')) {
@@ -322,6 +431,26 @@ var Cryptomaniacos = {
             cardDiv.appendChild(cardBody);
 
             return cardDiv;
+        },
+
+        Comment: function(author, body, datetime) {
+            var elementDiv = document.createElement('div');
+            elementDiv.classList.add('bg-light', 'd-flex', 'flex-column');
+
+            var authorH5 = document.createElement('h5');
+            authorH5.innerText = author;
+
+            var p = document.createElement('p');
+            p.innerText = body;
+
+            var dateTimeH6 = document.createElement('h6');
+            dateTimeH6.innerText = datetime;
+
+            elementDiv.appendChild(authorH5);
+            elementDiv.appendChild(p);
+            elementDiv.appendChild(dateTimeH6);
+
+            return elementDiv;
         }
     }
 }

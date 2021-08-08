@@ -10,4 +10,4 @@ $router = new Router();
 
 $router->GET('comments/all/(:num)/(:num)', 'controllers\\CommentController::getAll');
 $router->POST('email/send', 'controllers\\EmailController::send');
-$router->POST('comments/new', 'controllers\\CommentsController::new');
+$router->POST('comments/new', 'controllers\\CommentController::new');
