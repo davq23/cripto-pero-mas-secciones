@@ -323,7 +323,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
     }
 
     if (document.getElementById('criptoactivo-select')) 
-        getCoins(limit, skip, document.getElementById('criptoactivo-select').value, fillCoins, function(response, status) {
+        getCoins(limit, skip, fillCoins, function(response, status) {
             console.log(status, response);
         });
 
